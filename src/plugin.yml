@@ -1,0 +1,8 @@
+name: WorldControl
+version: 1.0
+main: dev.acri.worldcontrol.Main
+author: Viktoracri
+
+commands:
+  control:
+    description: Access the WorldControl GUI
