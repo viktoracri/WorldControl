@@ -8,13 +8,15 @@ import org.bukkit.entity.Player;
 
 public class WorldBorderUtils {
 	
+	public static final int MAXBORDER = 10000000;
+	
 	public void increaseWorldBorder(Player p, int blocks) {
 		WorldBorder border = p.getWorld().getWorldBorder();
 		
-		if(border.getSize() > 10000000)
+		if(border.getSize() > MAXBORDER)
 			return;
 		
-		Messager.sendMessageWithSound(p, "The World Border is now expanding to *§b"  + (int)(StorageManager.getFromWorld(p.getWorld()).getBorderSize() + blocks) + " blocks§a.", Sound.ENTITY_CHICKEN_EGG);
+		Messager.sendMessageWithSound(p, "The World Border is now expanding to §b"  + (int)(StorageManager.getFromWorld(p.getWorld()).getBorderSize() + blocks) + " blocks§a.", Sound.ENTITY_CHICKEN_EGG);
 		border.setSize(StorageManager.getFromWorld(p.getWorld()).getBorderSize() + blocks, 5);
 		StorageManager.getFromWorld(p.getWorld()).setBorderSize(StorageManager.getFromWorld(p.getWorld()).getBorderSize() + blocks);
 		
@@ -23,11 +25,11 @@ public class WorldBorderUtils {
 	public void decreaseWorldBorder(Player p, int blocks) {
 		WorldBorder border =  p.getWorld().getWorldBorder();
 		
-		if(border.getSize() > 10000000)
+		if(border.getSize() > MAXBORDER)
 			return;
 		
 		if(StorageManager.getFromWorld(p.getWorld()).getBorderSize() < blocks) {
-			border.setSize(1, 5);
+			border.setSize(0, 5);
 			StorageManager.getFromWorld(p.getWorld()).setBorderSize(1);
 			Messager.sendMessageWithSound(p, "§aThe World Border's size was set to §b1 block§a.", Sound.ENTITY_CHICKEN_EGG);
 
@@ -54,8 +56,6 @@ public class WorldBorderUtils {
 		StorageManager.getFromWorld(p.getWorld()).setBorderSize(500);
 		setBorderCenter(p.getWorld(), p.getLocation());
 		p.getWorld().getWorldBorder().setSize(500);
-		
-		p.sendMessage("§aWorld Border enabled with a range of §b500 blocks§a around your position.");
 	}
 	
 	

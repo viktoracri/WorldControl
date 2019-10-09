@@ -53,6 +53,20 @@ public enum WCItem {
 	GAMERULE_KEEP_INVENTORY("§aKeep Inventory", Material.CHEST),
 	GAMERULE_MOB_GRIEFING("§aMob Griefing", Material.DIRT),
 	GAMERULE_SHOW_DEATH_MESSAGES("§aShow Death Messages", Material.PAPER),
+	GAMERULE_COMMAND_BLOCK_OUTPUT("§aCommand Block Output", Material.COMMAND),
+	GAMERULE_ELYTRA_CHECK("§aDisable Elytra Movement Check", Material.ELYTRA),
+	GAMERULE_ENTITY_DROPS("§aEntity Drops", Material.COOKED_BEEF),
+	GAMERULE_MOB_LOOT("§aMob Loot", Material.ROTTEN_FLESH),
+	GAMERULE_TILE_DROPS("§aTile Drops", Material.COBBLESTONE),
+	GAMERULE_LOG_ADMIN_COMMANDS("§aLog Admin Commands", Material.BOOK_AND_QUILL),
+	GAMERULE_LIMITED_CRAFTING("§aLimited Crafting", Material.WORKBENCH),
+	GAMERULE_REDUCED_DEBUG_INFO("§aReduced Bug Info", Material.EMPTY_MAP),
+	GAMERULE_COMMAND_FEEDBACK("§aSend Command Feedback", Material.FIREWORK),
+	GAMERULE_SPECTATOR_GENERATE_CHUNKS("§aSpectators Generate Chunks", Material.GRASS),
+	GAMERULE_SPAWN_RADIUS("§aSpawn Radius", new ItemStack(Material.SKULL_ITEM, 1, (byte) 3)),
+	GAMERULE_MAX_ENTITY_CRAMMING("§aMax Entity Cramming", Material.EGG),
+	GAMERULE_RANDOM_TICK_SPEED("§aRandom Tick Speed", Material.SUGAR_CANE),
+	GAMERULE_DISABLE_RAIDS("§aDisable Raids", Material.IRON_SWORD),
 	
 	SUBMENU_TELEPORTATION("§3Teleportation", Material.ENDER_PEARL),
 	TELEPORT_ALL_TO_YOU("§aTP all to you", new ItemStack(Material.SKULL_ITEM, 1, (byte) 3)),
@@ -61,8 +75,21 @@ public enum WCItem {
 	
 	SUBMENU_ADMIN("§3Admin", Material.REDSTONE_BLOCK),
 	ADMIN_KICK_ALL("§aKick all", Material.WOOD_AXE),
-	ADMIN_GM1_ALL("§aGM1 all", Material.STONE_AXE),
+	ADMIN_GM1_ALL("§aGM1 all", Material.STONE_PICKAXE),
+	ADMIN_GM0_ALL("§aGM0 all", Material.WOOD_PICKAXE),
 	ADMIN_OP_ALL("§aOP all", Material.DIAMOND_AXE),
+	ADMIN_TOGGLE_WHITELIST("§aToggle Whitelist", Material.PAPER),
+	
+	VALUE_INCREASE_1("§aIncrease value by §b1",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 5)),
+	VALUE_INCREASE_5("§aIncrease value by §b5",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 5)),
+	VALUE_INCREASE_10("§aIncrease value by §b10",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 5)),
+	VALUE_INCREASE_50("§aIncrease value by §b50",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 5)),
+	VALUE_DECREASE_1("§cDecrease value by §b1",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 14)),
+	VALUE_DECREASE_5("§cDecrease value by §b5",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 14)),
+	VALUE_DECREASE_10("§cDecrease value by §b10",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 14)),
+	VALUE_DECREASE_50("§cDecrease value by §b50",  new ItemStack(Material.STAINED_CLAY, 1, (byte) 14)),
+	VALUE_INFO("§aEdit Gamerule Value", Material.GOLD_NUGGET),
+	VALUE_SAVE("§aACCEPT",  new ItemStack(Material.STAINED_GLASS, 1, (byte) 5)),
 	
 	
 	

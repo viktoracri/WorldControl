@@ -17,6 +17,7 @@ import dev.acri.worldcontrol.Main;
 import dev.acri.worldcontrol.utils.HiddenStringUtils;
 import dev.acri.worldcontrol.utils.ItemStackUtils;
 import dev.acri.worldcontrol.utils.StorageManager;
+import dev.acri.worldcontrol.utils.WorldBorderUtils;
 
 public class InventoryManager {
 	
@@ -124,7 +125,7 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -219,12 +220,12 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
 		String borderSize = StorageManager.getFromWorld(w).getBorderSize() + "";
-		if(w.getWorldBorder().getSize() < 10000000) {
+		if(w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
 			
 		
 		
@@ -253,7 +254,7 @@ public class InventoryManager {
 		lore.clear();
 		}
 		
-		if(w.getWorldBorder().getSize() < 1000000) {
+		if(w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
 			lore.add("§8» §7Status: §aENABLED");
 		}else {
 			lore.add("§8» §7Status: §cDISABLED");
@@ -287,18 +288,13 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
-		long time1 = w.getTime() + 6000;
-		if(time1 >= 24000) time1 -= 24000;
-		
-		int hour = (int)time1 / 1000;
-		String minutes = (int)((time1 - (hour * 1000)) / 1000d * 60) + "";
-		if(minutes.length() == 1) minutes = "0" + minutes;
 		
 		
-		lore.add("§8» §7Current time: §b" + hour + ":" + minutes);
+		
+		lore.add("§8» §7Current time: §b" + getCurrentTimeFormatted(w));
 		lore.add("§7");
 		lore.add("§a» §7Click to set the time to §b0:00");
 		
@@ -340,7 +336,7 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -374,9 +370,28 @@ public class InventoryManager {
 	}
 
 	public Inventory getGameruleControlInventory(World w) {
-		Inventory inv = Bukkit.createInventory(null, 27, "Gamerules");
+		Inventory inv = Bukkit.createInventory(null, 54, "Gamerules");
 		
 		List<String> lore = new ArrayList<String>();
+		
+		for(int i = 45; i < 54; i++) {
+			ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+			ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName("§7");
+			item.setItemMeta(meta);
+			inv.setItem(i, item);
+		}
+		
+		for(int i = 0; i < 9; i++) {
+			ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+			ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName("§7");
+			item.setItemMeta(meta);
+			inv.setItem(i, item);
+		}
+		
+		
+		
 		
 		lore.add("§7Control some of the essential gamerules");
 		lore.add("§7in your world.");
@@ -385,7 +400,7 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;") + "§eGo Back", lore));
+		inv.setItem(36, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -409,15 +424,6 @@ public class InventoryManager {
 		inv.setItem(11, ItemStackUtils.getItemStack(WCItem.GAMERULE_FIRE.getItem(), WCItem.GAMERULE_FIRE.getDisplayname(), lore));
 		lore.clear();
 		
-		if(w.getGameRuleValue("announceAdvancements").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
-		else lore.add("§8» §7Status: §cDISABLED");
-		lore.add("§7");
-		lore.add("§7If disabled, players achievements will not");
-		lore.add("§7be announced in chat.");
-		lore.add("§8§m                 ");
-		lore.add("§a» §7Click to toggle gamerule");
-		inv.setItem(12, ItemStackUtils.getItemStack(WCItem.GAMERULE_ANNOUNCE_ADVANCEMENTS.getItem(), WCItem.GAMERULE_ANNOUNCE_ADVANCEMENTS.getDisplayname(), lore));
-		lore.clear();
 		
 		if(w.getGameRuleValue("doMobSpawning").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
 		else lore.add("§8» §7Status: §cDISABLED");
@@ -425,17 +431,25 @@ public class InventoryManager {
 		lore.add("§7If disabled, no mobs will spawn naturally");
 		lore.add("§8§m                 ");
 		lore.add("§a» §7Click to toggle gamerule");
-		inv.setItem(13, ItemStackUtils.getItemStack(WCItem.GAMERULE_MOB_SPAWNING.getItem(), WCItem.GAMERULE_MOB_SPAWNING.getDisplayname(), lore));
+		inv.setItem(12, ItemStackUtils.getItemStack(WCItem.GAMERULE_MOB_SPAWNING.getItem(), WCItem.GAMERULE_MOB_SPAWNING.getDisplayname(), lore));
 		lore.clear();
 		
-		if(w.getGameRuleValue("keepInventory").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		if(w.getGameRuleValue("doMobLoot").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
 		else lore.add("§8» §7Status: §cDISABLED");
 		lore.add("§7");
-		lore.add("§7If enabled, you will keep your inventory");
-		lore.add("§7when you die.");
+		lore.add("§7If disabled, mobs won't drop items");
 		lore.add("§8§m                 ");
 		lore.add("§a» §7Click to toggle gamerule");
-		inv.setItem(14, ItemStackUtils.getItemStack(WCItem.GAMERULE_KEEP_INVENTORY.getItem(), WCItem.GAMERULE_KEEP_INVENTORY.getDisplayname(), lore));
+		inv.setItem(13, ItemStackUtils.getItemStack(WCItem.GAMERULE_MOB_LOOT.getItem(), WCItem.GAMERULE_MOB_LOOT.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("doEntityDrops").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7If disabled, all entities won't drop items");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(14, ItemStackUtils.getItemStack(WCItem.GAMERULE_ENTITY_DROPS.getItem(), WCItem.GAMERULE_ENTITY_DROPS.getDisplayname(), lore));
 		lore.clear();
 		
 		if(w.getGameRuleValue("mobGriefing").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
@@ -448,6 +462,15 @@ public class InventoryManager {
 		inv.setItem(15, ItemStackUtils.getItemStack(WCItem.GAMERULE_MOB_GRIEFING.getItem(), WCItem.GAMERULE_MOB_GRIEFING.getDisplayname(), lore));
 		lore.clear();
 		
+		if(w.getGameRuleValue("doTileDrops").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7If disabled, blocks won't drop once broken");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(16, ItemStackUtils.getItemStack(WCItem.GAMERULE_TILE_DROPS.getItem(), WCItem.GAMERULE_TILE_DROPS.getDisplayname(), lore));
+		lore.clear();
+		
 		if(w.getGameRuleValue("showDeathMessages").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
 		else lore.add("§8» §7Status: §cDISABLED");
 		lore.add("§7");
@@ -455,8 +478,139 @@ public class InventoryManager {
 		lore.add("§7when players die.");
 		lore.add("§8§m                 ");
 		lore.add("§a» §7Click to toggle gamerule");
-		inv.setItem(16, ItemStackUtils.getItemStack(WCItem.GAMERULE_SHOW_DEATH_MESSAGES.getItem(), WCItem.GAMERULE_SHOW_DEATH_MESSAGES.getDisplayname(), lore));
+		inv.setItem(19, ItemStackUtils.getItemStack(WCItem.GAMERULE_SHOW_DEATH_MESSAGES.getItem(), WCItem.GAMERULE_SHOW_DEATH_MESSAGES.getDisplayname(), lore));
 		lore.clear();
+		
+		if(w.getGameRuleValue("keepInventory").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7If enabled, you will keep your inventory");
+		lore.add("§7when you die.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(20, ItemStackUtils.getItemStack(WCItem.GAMERULE_KEEP_INVENTORY.getItem(), WCItem.GAMERULE_KEEP_INVENTORY.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("announceAdvancements").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7If disabled, players achievements will not");
+		lore.add("§7be announced in chat.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(21, ItemStackUtils.getItemStack(WCItem.GAMERULE_ANNOUNCE_ADVANCEMENTS.getItem(), WCItem.GAMERULE_ANNOUNCE_ADVANCEMENTS.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("commandBlockOutput").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7If command blocks's output should be broadcasted");
+		lore.add("§7to OPs.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(22, ItemStackUtils.getItemStack(WCItem.GAMERULE_COMMAND_BLOCK_OUTPUT.getItem(), WCItem.GAMERULE_COMMAND_BLOCK_OUTPUT.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("logAdminCommands").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7Whether to log admin commands to");
+		lore.add("§7server logs. ");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(23, ItemStackUtils.getItemStack(WCItem.GAMERULE_LOG_ADMIN_COMMANDS.getItem(), WCItem.GAMERULE_LOG_ADMIN_COMMANDS.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("sendCommandFeedback").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7Whether the feedback from commands executed by ");
+		lore.add("§7a player should show up in chat");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(24, ItemStackUtils.getItemStack(WCItem.GAMERULE_COMMAND_FEEDBACK.getItem(), WCItem.GAMERULE_COMMAND_FEEDBACK.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("reducedDebugInfo").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7Whether the debug screen shows all or reduced info.");
+		lore.add("§7Toggles also if F3+H and F3+B works.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(25, ItemStackUtils.getItemStack(WCItem.GAMERULE_REDUCED_DEBUG_INFO.getItem(), WCItem.GAMERULE_REDUCED_DEBUG_INFO.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("disableElytraMovementCheck").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7Whether the server should skip checking player speed ");
+		lore.add("§7when the player is wearing elytra.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(28, ItemStackUtils.getItemStack(WCItem.GAMERULE_ELYTRA_CHECK.getItem(), WCItem.GAMERULE_ELYTRA_CHECK.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("spectatorsGenerateChunks").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7Whether players in spectator mode should");
+		lore.add("§7generate chunks or not.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(29, ItemStackUtils.getItemStack(WCItem.GAMERULE_SPECTATOR_GENERATE_CHUNKS.getItem(), WCItem.GAMERULE_SPECTATOR_GENERATE_CHUNKS.getDisplayname(), lore));
+		lore.clear();
+		
+		if(w.getGameRuleValue("doLimitedCrafting").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		lore.add("§7Whether players should be able to craft only ");
+		lore.add("§7those recipes that they've unlocked first");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to toggle gamerule");
+		inv.setItem(30, ItemStackUtils.getItemStack(WCItem.GAMERULE_LIMITED_CRAFTING.getItem(), WCItem.GAMERULE_LIMITED_CRAFTING.getDisplayname(), lore));
+		lore.clear();
+		
+		lore.add("§8» §7Current: §b" + w.getGameRuleValue("spawnRadius"));
+		lore.add("§7");
+		lore.add("§7How large radius around the spawn block players");
+		lore.add("§7can spawn.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to edit this value");
+		inv.setItem(31, ItemStackUtils.getItemStack(WCItem.GAMERULE_SPAWN_RADIUS.getItem(), WCItem.GAMERULE_SPAWN_RADIUS.getDisplayname(), lore));
+		lore.clear();
+		
+		lore.add("§8» §7Current: §b" + w.getGameRuleValue("maxEntityCramming"));
+		lore.add("§7");
+		lore.add("§7How many entities can be in a 1x1x1 area");
+		lore.add("§7before they start dying.");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to edit this value");
+		inv.setItem(32, ItemStackUtils.getItemStack(WCItem.GAMERULE_MAX_ENTITY_CRAMMING.getItem(), WCItem.GAMERULE_MAX_ENTITY_CRAMMING.getDisplayname(), lore));
+		lore.clear();
+		
+		lore.add("§8» §7Current: §b" + w.getGameRuleValue("randomTickSpeed"));
+		lore.add("§7");
+		lore.add("§7A larger tick speed means stuff grows faster");
+		lore.add("§7");
+		lore.add("§8§m                 ");
+		lore.add("§a» §7Click to edit this value");
+		inv.setItem(33, ItemStackUtils.getItemStack(WCItem.GAMERULE_RANDOM_TICK_SPEED.getItem(), WCItem.GAMERULE_RANDOM_TICK_SPEED.getDisplayname(), lore));
+		lore.clear();
+		
+		if(Bukkit.getVersion().toLowerCase().contains("1.14.3") || Bukkit.getVersion().toLowerCase().contains("1.14.4")) {
+			if(w.getGameRuleValue("disableRaids").equalsIgnoreCase("true")) lore.add("§8» §7Status: §aENABLED");
+			else lore.add("§8» §7Status: §cDISABLED");
+			lore.add("§7");
+			lore.add("§7Whether to disable raids or not");
+			lore.add("§7");
+			lore.add("§8§m                 ");
+			lore.add("§a» §7Click to toggle gamerule");
+			inv.setItem(34, ItemStackUtils.getItemStack(WCItem.GAMERULE_DISABLE_RAIDS.getItem(), WCItem.GAMERULE_DISABLE_RAIDS.getDisplayname(), lore));
+			lore.clear();
+		}
+		
+		
 		
 		
 		
@@ -476,14 +630,14 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		lore.add("§8» §7Border Size: §b" + StorageManager.getFromWorld(w).getBorderSize());
 		lore.add("§7");
 		lore.add("§7Click to spread all players randomly");
 		lore.add("§7within the border.");
-		if(w.getWorldBorder().getSize() > 1000000) lore.set(0, "§8» §c§lBorder Not Enabled"); 
+		if(w.getWorldBorder().getSize() > WorldBorderUtils.MAXBORDER) lore.set(0, "§8» §c§lBorder Not Enabled"); 
 		else {lore.add("§7");lore.add("§a» §7Click to start spreading");}
 		inv.setItem(12, ItemStackUtils.getItemStack(WCItem.TELEPORT_SCATTER_BORDER.getItem(), WCItem.TELEPORT_SCATTER_BORDER.getDisplayname(), lore));
 		lore.clear();
@@ -522,20 +676,27 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		lore.add("§7Kicks all normal players");
 		lore.add("§7");
 		lore.add("§a» §7Click to kick all");
-		inv.setItem(12, ItemStackUtils.getItemStack(WCItem.ADMIN_KICK_ALL.getItem(), WCItem.ADMIN_KICK_ALL.getDisplayname(), lore));
+		inv.setItem(10, ItemStackUtils.getItemStack(WCItem.ADMIN_KICK_ALL.getItem(), WCItem.ADMIN_KICK_ALL.getDisplayname(), lore));
+		lore.clear();
+		
+		lore.add("§7Gives all players survival mode.");
+		lore.add("§7");
+		lore.add("§a» §7Click to make all players GM0");
+		
+		inv.setItem(11, ItemStackUtils.getItemStack(WCItem.ADMIN_GM0_ALL.getItem(), WCItem.ADMIN_GM0_ALL.getDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§7Gives all players creative mode.");
 		lore.add("§7");
 		lore.add("§a» §7Click to make all players GM1");
 		
-		inv.setItem(13, ItemStackUtils.getItemStack(WCItem.ADMIN_GM1_ALL.getItem(), WCItem.ADMIN_GM1_ALL.getDisplayname(), lore));
+		inv.setItem(12, ItemStackUtils.getItemStack(WCItem.ADMIN_GM1_ALL.getItem(), WCItem.ADMIN_GM1_ALL.getDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§7Gives all players OP");
@@ -543,14 +704,113 @@ public class InventoryManager {
 		lore.add("§7");
 		lore.add("§a» §7Click to make all players god");
 		
-		inv.setItem(14, ItemStackUtils.getItemStack(WCItem.ADMIN_OP_ALL.getItem(), WCItem.ADMIN_OP_ALL.getDisplayname(), lore));
+		inv.setItem(13, ItemStackUtils.getItemStack(WCItem.ADMIN_OP_ALL.getItem(), WCItem.ADMIN_OP_ALL.getDisplayname(), lore));
+		lore.clear();
+		
+		if(Bukkit.hasWhitelist()) lore.add("§8» §7Status: §aENABLED");
+		else lore.add("§8» §7Status: §cDISABLED");
+		lore.add("§7");
+		
+		lore.add("§7Toggles whitelist on and off");
+		lore.add("§7");
+		lore.add("§a» §7Click to toggle whitelist");
+		
+		inv.setItem(15, ItemStackUtils.getItemStack(WCItem.ADMIN_TOGGLE_WHITELIST.getItem(), WCItem.ADMIN_TOGGLE_WHITELIST.getDisplayname(), lore));
+		lore.clear();
 		
 		
 		
 		return inv;
 	}
 	
+	public Inventory getGameruleValueChooserInventory(World w, String gamerule, int value) {
+		
+		if(value < 0)value = 0;
+		
+		
+		Inventory inv = Bukkit.createInventory(null, 27, "Edit Value");
+		
+		List<String> lore = new ArrayList<String>();
+		
+		lore.add("§7");
+		lore.add("§7Edit the value of the gamerule §b" + gamerule);
+		
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";" + gamerule + ";" + value + ";") + "§3Edit Value", lore));
+		lore.clear();
+		
+		lore.add("§a» §7Click to go back");
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;gamerule;") + "§eGo Back", lore));
+		lore.clear();
+		
+		lore.add("§8» §7New value: §b" + value);
+		lore.add("§7");
+		lore.add("§a» §7Click to edit this value.");
+		inv.setItem(14, ItemStackUtils.getItemStack(WCItem.VALUE_INCREASE_1.getItem(), WCItem.VALUE_INCREASE_1.getDisplayname(), lore));
+		inv.setItem(15, ItemStackUtils.getItemStack(WCItem.VALUE_INCREASE_5.getItem(), WCItem.VALUE_INCREASE_5.getDisplayname(), lore));
+		inv.setItem(16, ItemStackUtils.getItemStack(WCItem.VALUE_INCREASE_10.getItem(), WCItem.VALUE_INCREASE_10.getDisplayname(), lore));
+		inv.setItem(17, ItemStackUtils.getItemStack(WCItem.VALUE_INCREASE_50.getItem(), WCItem.VALUE_INCREASE_50.getDisplayname(), lore));
+		inv.setItem(12, ItemStackUtils.getItemStack(WCItem.VALUE_DECREASE_1.getItem(), WCItem.VALUE_DECREASE_1.getDisplayname(), lore));
+		inv.setItem(11, ItemStackUtils.getItemStack(WCItem.VALUE_DECREASE_5.getItem(), WCItem.VALUE_DECREASE_5.getDisplayname(), lore));
+		inv.setItem(10, ItemStackUtils.getItemStack(WCItem.VALUE_DECREASE_10.getItem(), WCItem.VALUE_DECREASE_10.getDisplayname(), lore));
+		inv.setItem(9, ItemStackUtils.getItemStack(WCItem.VALUE_DECREASE_50.getItem(), WCItem.VALUE_DECREASE_50.getDisplayname(), lore));
+		
+		lore.clear();
+		
+		
+		lore.add("§8» §7Current value: §b" + w.getGameRuleValue(gamerule));
+		lore.add("§8» §7New value: §b" + value);
+		lore.add("§7");
+		lore.add("§7Edit the value of the gamerule §b" + gamerule + "§7.");
+		lore.add("§8» §7When you're done, click §aACCEPT");
+		lore.add("§8» §7To discard changes, click §eGo Back");
+		inv.setItem(13, ItemStackUtils.getItemStack(WCItem.VALUE_INFO.getItem(), WCItem.VALUE_INFO.getDisplayname(), lore));
+		lore.clear();
+		
+		lore.add("§7If you wish to apply the changes, click here.");
+		lore.add("§7");
+		lore.add("§a» §7Click to accept changes.");
+		inv.setItem(26, ItemStackUtils.getItemStack(WCItem.VALUE_SAVE.getItem(), WCItem.VALUE_SAVE.getDisplayname(), lore));
+		
+		
+		
+		return inv;
+	}
 	
+	public static String getCurrentTimeFormatted(World w) {
+		long time1 = w.getTime() + 6000;
+		if(time1 >= 24000) time1 -= 24000;
+		
+		int hour = (int)time1 / 1000;
+		String minutes = (int)((time1 - (hour * 1000)) / 1000d * 60) + "";
+		if(minutes.length() == 1) minutes = "0" + minutes;
+		return hour + ":" + minutes;
+	}
+	
+	public static void updateInventory(Player p, Inventory inv) {
+		
+		
+		Inventory pInv = p.getOpenInventory().getTopInventory();
+		
+		if(pInv == null ) {
+			p.openInventory(inv);
+			return;
+		}
+		
+		if(pInv.getSize() != inv.getSize()) {
+			p.openInventory(inv);
+			return;
+		}
+		
+		
+		for(int i = 0; i < pInv.getSize(); i++) {
+			ItemStack pItem = pInv.getItem(i);
+			ItemStack item = inv.getItem(i);
+			if(pItem != item) {
+				p.getOpenInventory().getTopInventory().setItem(i, item);
+			}
+		}
+		
+	}
 	
 	public static void startRunnable() {
 		
@@ -563,19 +823,26 @@ public class InventoryManager {
 						if(p.getOpenInventory().getTopInventory().getItem(4).hasItemMeta()) {
 							if(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().hasDisplayName()){
 								if(HiddenStringUtils.hasHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName())){
+									
+									
 									InventoryManager invManager = new InventoryManager();	
 									World w = Bukkit.getWorld(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1]);
 									
 									
 									if(p.getOpenInventory().getTitle().equalsIgnoreCase("Time")) {
-										p.openInventory(invManager.getTimeControlInventory(w));
+										if(!p.getOpenInventory().getTopInventory().getItem(13).getItemMeta().getLore().get(0).substring(p.getOpenInventory().getTopInventory().getItem(13).getItemMeta().getLore().get(0).indexOf("§b") + 2).equalsIgnoreCase(getCurrentTimeFormatted(w))) {
+											updateInventory(p, invManager.getTimeControlInventory(w));
+											//p.getOpenInventory().getTopInventory().setContents(invManager.getTimeControlInventory(w).getContents());
+										}
+											//p.openInventory(invManager.getTimeControlInventory(w));
+											
 										
-									}else if(p.getOpenInventory().getTitle().equalsIgnoreCase("World Border") && w.getWorldBorder().getSize() < 1000000) {
-										
-										//Math.abs(StorageManager.getFromWorld(w).getBorderSize() - w.getWorldBorder().getSize()) > 0.5
-										if(p.getOpenInventory().getTopInventory().getItem(20).getItemMeta().getLore().get(1).contains("Actual size"))
-											p.openInventory(invManager.getBorderControlInventory(Bukkit.getWorld(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1])));
-										
+									}else if(p.getOpenInventory().getTitle().equalsIgnoreCase("World Border") && w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
+										if(p.getOpenInventory().getTopInventory().getItem(20).getItemMeta().getLore().get(1).contains("Actual size")) {
+											//p.openInventory(invManager.getBorderControlInventory(Bukkit.getWorld(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1])));
+											updateInventory(p, invManager.getBorderControlInventory(w));
+										}else {
+										}
 									}
 								}
 							}
@@ -586,7 +853,7 @@ public class InventoryManager {
 				
 			}
 			
-		}.runTaskTimer(Main.getInstance(), 20l, 10l);
+		}.runTaskTimer(Main.getInstance(), 20l, 1l);
 		
 	}
 	

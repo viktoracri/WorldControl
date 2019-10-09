@@ -32,9 +32,8 @@ public class ConfigManager {
 	}
 	
 	public static void saveStorageToConfigs() {
-		
+
 		for(World w : Bukkit.getWorlds()) {
-			
 			OptionsStorage os = StorageManager.getFromWorld(w);
 			
 			FileConfiguration config = Main.getInstance().getConfig();

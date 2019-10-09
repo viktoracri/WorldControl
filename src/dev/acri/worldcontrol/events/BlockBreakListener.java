@@ -11,9 +11,9 @@ public class BlockBreakListener implements Listener{
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		if(!StorageManager.getFromWorld(e.getPlayer().getWorld()).isBuildEnabled())
-		if(!e.getPlayer().hasPermission("worldcontrol.player.build.bypass") && !e.getPlayer().isOp()) {
-			e.setCancelled(true);
-		}
+			if(!e.getPlayer().hasPermission("worldcontrol.player.build.bypass") && !e.getPlayer().isOp()) {
+				e.setCancelled(true);
+			}
 	}
 
 }

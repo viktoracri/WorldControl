@@ -11,7 +11,6 @@ public class BlockPlaceListener implements Listener{
 	
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent e) {
-		Bukkit.getLogger().info(StorageManager.getFromWorld(e.getPlayer().getWorld()).isBuildEnabled() + ", ok");
 		if(!StorageManager.getFromWorld(e.getPlayer().getWorld()).isBuildEnabled())
 			if(!e.getPlayer().hasPermission("worldcontrol.player.build.bypass") && !e.getPlayer().isOp()) {
 				e.setCancelled(true);

@@ -42,11 +42,16 @@ public class InventoryClickListener implements Listener{
 			return ;
 		}
 		
+		
+		if(clickType == ClickType.UNKNOWN)
+			return;
+		if(currentItem == null)
+			return;
+		
 		if(currentItem.getType().equals(Material.AIR))
 			return;
 		
-		if(currentItem == null)
-			return;
+		
 		
 		
 		boolean isMenu = false;
@@ -72,77 +77,96 @@ public class InventoryClickListener implements Listener{
 			WCItem item = WCItem.getItem(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";")[0]);
 			if(item != null) {
 				if(item == WCItem.SUBMENU_PLAYER) {
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}
 				
 				else if(item == WCItem.PLAYER_PVP_TOGGLE) {
 					StorageManager.getFromWorld(p.getWorld()).setPvpEnabled(!StorageManager.getFromWorld(p.getWorld()).isPvpEnabled());
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.PLAYER_BUILD_TOGGLE) {
 					StorageManager.getFromWorld(p.getWorld()).setBuildEnabled(!StorageManager.getFromWorld(p.getWorld()).isBuildEnabled());
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.PLAYER_REGEN_TOGGLE) {
 					StorageManager.getFromWorld(p.getWorld()).setRegenEnabled(!StorageManager.getFromWorld(p.getWorld()).isRegenEnabled());
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.PLAYER_CRAFTING_TOGGLE) {
 					StorageManager.getFromWorld(p.getWorld()).setCraftingEnabled(!StorageManager.getFromWorld(p.getWorld()).isCraftingEnabled());
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.PLAYER_FREEZE_TOGGLE) {
 					StorageManager.getFromWorld(p.getWorld()).setFreezeEnabled(!StorageManager.getFromWorld(p.getWorld()).isFreezeEnabled());
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.PLAYER_CHAT_TOGGLE) {
 					StorageManager.getFromWorld(p.getWorld()).setChatEnabled(!StorageManager.getFromWorld(p.getWorld()).isChatEnabled());
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.PLAYER_INVINCIBILITY_TOGGLE) {
 					StorageManager.getFromWorld(p.getWorld()).setInvincibilityEnabled(!StorageManager.getFromWorld(p.getWorld()).isInvincibilityEnabled());
-					p.openInventory(invManager.getPlayerControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}
 				
 				
 				else if(item == WCItem.SUBMENU_BORDER) {
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}
 				
 				else if(item == WCItem.BORDER_INCREASE_10) {
 					borderUtils.increaseWorldBorder(p, 10);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_INCREASE_50) {
 					borderUtils.increaseWorldBorder(p, 50);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_INCREASE_100) {
 					borderUtils.increaseWorldBorder(p, 100);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_INCREASE_250) {
 					borderUtils.increaseWorldBorder(p, 250);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_INCREASE_500) {
 					borderUtils.increaseWorldBorder(p, 500);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}
 				else if(item == WCItem.BORDER_DECREASE_10) {
 					borderUtils.decreaseWorldBorder(p, 10);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_DECREASE_50) {
 					borderUtils.decreaseWorldBorder(p, 50);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_DECREASE_100) {
 					borderUtils.decreaseWorldBorder(p, 100);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_DECREASE_250) {
 					borderUtils.decreaseWorldBorder(p, 250);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.BORDER_DECREASE_500) {
 					borderUtils.decreaseWorldBorder(p, 500);
-					p.openInventory(invManager.getBorderControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}
 				else if(item == WCItem.BORDER_TOGGLE) {
-					if(w.getWorldBorder().getSize() < 1000000) {
+					if(w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
 						borderUtils.resetWorldBorder(p.getWorld());
-						p.openInventory(invManager.getBorderControlInventory(w));
+						InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
 						Messager.sendMessageWithSound(p, "§cThe World Border has been turned off.", Sound.ENTITY_CHICKEN_EGG);
 					}else {
 						borderUtils.setDefaultBorder(p);
-						p.openInventory(invManager.getBorderControlInventory(w));
+						InventoryManager.updateInventory(p, invManager.getBorderControlInventory(w));
 						Messager.sendMessageWithSound(p, "§aThe World Border has been turned on.", Sound.ENTITY_CHICKEN_EGG);
 					}	
 				}else if(item == WCItem.BORDER_SETCENTER) {
@@ -151,86 +175,199 @@ public class InventoryClickListener implements Listener{
 				}
 				
 				else if(item == WCItem.SUBMENU_TIME) {
-					p.openInventory(invManager.getTimeControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getTimeControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.TIME_MIDNIGHT) {
 					w.setTime(18000);
 					Messager.sendMessageWithSound(p, "The Time was set to §b0:00", Sound.ENTITY_CHICKEN_EGG);
-					p.openInventory(invManager.getTimeControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getTimeControlInventory(w));
 				}else if(item == WCItem.TIME_DAWN) {
 					w.setTime(0);
 					Messager.sendMessageWithSound(p, "The Time was set to §b6:00", Sound.ENTITY_CHICKEN_EGG);
-					p.openInventory(invManager.getTimeControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getTimeControlInventory(w));
 				}else if(item == WCItem.TIME_NOON) {
 					w.setTime(6000);
 					Messager.sendMessageWithSound(p, "The Time was set to §b12:00", Sound.ENTITY_CHICKEN_EGG);
-					p.openInventory(invManager.getTimeControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getTimeControlInventory(w));
 				}else if(item == WCItem.TIME_DUSK) {
 					w.setTime(12000);
 					Messager.sendMessageWithSound(p, "The Time was set to §b18:00", Sound.ENTITY_CHICKEN_EGG);
-					p.openInventory(invManager.getTimeControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getTimeControlInventory(w));
 				}else if(item == WCItem.TIME_FREEZE) {
 					w.setGameRuleValue("doDaylightCycle", (!Boolean.parseBoolean(w.getGameRuleValue("doDaylightCycle"))) + "");
 					if(w.getGameRuleValue("doDaylightCycle").equalsIgnoreCase("true"))
-						Messager.sendMessageWithSound(p, "Time Freeze has been turned on.", Sound.ENTITY_CHICKEN_EGG);
-					else Messager.sendMessageWithSound(p, "§cTime Freeze has been turned off.", Sound.ENTITY_CHICKEN_EGG);
-					p.openInventory(invManager.getTimeControlInventory(w));
+						Messager.sendMessageWithSound(p, "§cTime Freeze has been turned off.", Sound.ENTITY_CHICKEN_EGG);
+					else Messager.sendMessageWithSound(p, "Time Freeze has been turned on.", Sound.ENTITY_CHICKEN_EGG);
+					
+					InventoryManager.updateInventory(p, invManager.getTimeControlInventory(w));
 				}
 				
 				else if(item == WCItem.SUBMENU_DIFFICULTY) {
 					p.openInventory(invManager.getDifficultyControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.DIFFICULTY_PEACEFUL) {
 					w.setDifficulty(Difficulty.PEACEFUL);
-					p.openInventory(invManager.getDifficultyControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getDifficultyControlInventory(w));
 					Messager.sendMessageWithSound(p, "The Difficulty was set to §bPeaceful", Sound.ENTITY_CHICKEN_EGG);
 				}else if(item == WCItem.DIFFICULTY_EASY) {
 					w.setDifficulty(Difficulty.EASY);
-					p.openInventory(invManager.getDifficultyControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getDifficultyControlInventory(w));
 					Messager.sendMessageWithSound(p, "The Difficulty was set to §bEasy", Sound.ENTITY_CHICKEN_EGG);
 				}else if(item == WCItem.DIFFICULTY_NORMAL) {
 					w.setDifficulty(Difficulty.NORMAL);
-					p.openInventory(invManager.getDifficultyControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getDifficultyControlInventory(w));
 					Messager.sendMessageWithSound(p, "The Difficulty was set to §bNormal", Sound.ENTITY_CHICKEN_EGG);
 				}else if(item == WCItem.DIFFICULTY_HARD) {
 					w.setDifficulty(Difficulty.HARD);
-					p.openInventory(invManager.getDifficultyControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getDifficultyControlInventory(w));
 					Messager.sendMessageWithSound(p, "The Difficulty was set to §bHard", Sound.ENTITY_CHICKEN_EGG);
 				}else if(item == WCItem.DIFFICULTY_EXTREME) {
 					StorageManager.getFromWorld(w).setExtremeDifficultyEnabled(!StorageManager.getFromWorld(w).isExtremeDifficultyEnabled());
 					if(StorageManager.getFromWorld(w).isExtremeDifficultyEnabled())
 						Messager.sendMessageWithSound(p, "§5EXTREME §amode has been turned on.", Sound.ENTITY_CHICKEN_EGG);
 					else Messager.sendMessageWithSound(p, "§5EXTREME §cmode has been turned off.", Sound.ENTITY_CHICKEN_EGG);
-					p.openInventory(invManager.getDifficultyControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getDifficultyControlInventory(w));
 				}
 				
 				else if(item == WCItem.SUBMENU_GAMERULES) {
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.GAMERULE_FIRE) {
 					w.setGameRuleValue("doFireTick", (!Boolean.parseBoolean(w.getGameRuleValue("doFireTick"))) + "");
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.GAMERULE_MOB_GRIEFING) {
 					w.setGameRuleValue("mobGriefing", (!Boolean.parseBoolean(w.getGameRuleValue("mobGriefing"))) + "");
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.GAMERULE_ANNOUNCE_ADVANCEMENTS) {
 					w.setGameRuleValue("announceAdvancements", (!Boolean.parseBoolean(w.getGameRuleValue("announceAdvancements"))) + "");
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.GAMERULE_MOB_SPAWNING) {
 					w.setGameRuleValue("doMobSpawning", (!Boolean.parseBoolean(w.getGameRuleValue("doMobSpawning"))) + "");
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.GAMERULE_WEATHER) {
 					w.setGameRuleValue("doWeatherCycle", (!Boolean.parseBoolean(w.getGameRuleValue("doWeatherCycle"))) + "");
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.GAMERULE_KEEP_INVENTORY) {
 					w.setGameRuleValue("keepInventory", (!Boolean.parseBoolean(w.getGameRuleValue("keepInventory"))) + "");
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.GAMERULE_SHOW_DEATH_MESSAGES) {
 					w.setGameRuleValue("showDeathMessages", (!Boolean.parseBoolean(w.getGameRuleValue("showDeathMessages"))) + "");
-					p.openInventory(invManager.getGameruleControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_COMMAND_BLOCK_OUTPUT) {
+					w.setGameRuleValue("commandBlockOutput", (!Boolean.parseBoolean(w.getGameRuleValue("commandBlockOutput"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_ELYTRA_CHECK) {
+					w.setGameRuleValue("disableElytraMovementCheck", (!Boolean.parseBoolean(w.getGameRuleValue("disableElytraMovementCheck"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_ENTITY_DROPS) {
+					w.setGameRuleValue("doEntityDrops", (!Boolean.parseBoolean(w.getGameRuleValue("doEntityDrops"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_MOB_LOOT) {
+					w.setGameRuleValue("doMobLoot", (!Boolean.parseBoolean(w.getGameRuleValue("doMobLoot"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_TILE_DROPS) {
+					w.setGameRuleValue("doTileDrops", (!Boolean.parseBoolean(w.getGameRuleValue("doTileDrops"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_LOG_ADMIN_COMMANDS) {
+					w.setGameRuleValue("logAdminCommands", (!Boolean.parseBoolean(w.getGameRuleValue("logAdminCommands"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_LIMITED_CRAFTING) {
+					w.setGameRuleValue("doLimitedCrafting", (!Boolean.parseBoolean(w.getGameRuleValue("doLimitedCrafting"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_REDUCED_DEBUG_INFO) {
+					w.setGameRuleValue("reducedDebugInfo", (!Boolean.parseBoolean(w.getGameRuleValue("reducedDebugInfo"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_COMMAND_FEEDBACK) {
+					w.setGameRuleValue("sendCommandFeedback", (!Boolean.parseBoolean(w.getGameRuleValue("sendCommandFeedback"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_SPECTATOR_GENERATE_CHUNKS) {
+					w.setGameRuleValue("spectatorsGenerateChunks", (!Boolean.parseBoolean(w.getGameRuleValue("spectatorsGenerateChunks"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_DISABLE_RAIDS) {
+					w.setGameRuleValue("disableRaids", (!Boolean.parseBoolean(w.getGameRuleValue("disableRaids"))) + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_SPAWN_RADIUS) {
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, "spawnRadius", Integer.parseInt(w.getGameRuleValue("spawnRadius"))));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_MAX_ENTITY_CRAMMING) {
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, "maxEntityCramming", Integer.parseInt(w.getGameRuleValue("maxEntityCramming"))));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.GAMERULE_RANDOM_TICK_SPEED) {
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, "randomTickSpeed", Integer.parseInt(w.getGameRuleValue("randomTickSpeed"))));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}
+				
+				else if(item == WCItem.VALUE_INCREASE_1) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value + 1));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_INCREASE_5) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value + 5));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_INCREASE_10) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value + 10));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_INCREASE_50) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value + 50));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_DECREASE_1) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value - 1));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_DECREASE_5) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value - 5));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_DECREASE_10) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value - 10));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_DECREASE_50) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					InventoryManager.updateInventory(p, invManager.getGameruleValueChooserInventory(w, gamerule, value - 50));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+				}else if(item == WCItem.VALUE_SAVE) {	
+					int value = Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[3]);
+					String gamerule = HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2];
+					w.setGameRuleValue(gamerule, value + "");
+					InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1l, 1l);
 				}
 				
 				else if(item == WCItem.SUBMENU_TELEPORTATION) {
-					p.openInventory(invManager.getTeleportationControlInventory(w));
+					InventoryManager.updateInventory(p, invManager.getTeleportationControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.TELEPORT_SCATTER_BORDER) {
-					if(w.getWorldBorder().getSize() < 1000000) {
+					if(w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
 						p.closeInventory();
 						SpreadPlayersThread spt = new SpreadPlayersThread(w);
 						spt.start();
@@ -240,17 +377,20 @@ public class InventoryClickListener implements Listener{
 						target.teleport(p, TeleportCause.COMMAND);
 					}
 					Messager.sendMessageWithSound(p, "All players were teleported to you.", Sound.ENTITY_CHICKEN_EGG);
+					p.closeInventory();
 				}else if(item == WCItem.TELEPORT_10_UP) {
 					for(Player all : Bukkit.getOnlinePlayers()) {
 						Location loc = all.getLocation();
 						loc.setY(loc.getY() + 10);
 						all.teleport(loc);
 					}
+					p.closeInventory();
 					Messager.sendMessageWithSound(p, "All players has been successfully annoyed.", Sound.ENTITY_CHICKEN_EGG);
 				}
 				
 				else if(item == WCItem.SUBMENU_ADMIN) {
 					p.openInventory(invManager.getAdminControlInventory(w));
+					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.ADMIN_KICK_ALL) {
 					for(Player all : Bukkit.getOnlinePlayers()) {
 						if(!all.hasPermission("worldcontrol.admin.kickall.bypass") && !all.isOp()) {
@@ -259,9 +399,17 @@ public class InventoryClickListener implements Listener{
 					}
 					p.closeInventory();
 					Messager.sendMessageWithSound(p, "All players has been kicked.", Sound.ENTITY_CHICKEN_EGG);
+				}else if(item == WCItem.ADMIN_GM0_ALL) {
+					for(Player all : Bukkit.getOnlinePlayers()) {
+						if(!all.hasPermission("worldcontrol.admin.gamemode.bypass"))
+							all.setGameMode(GameMode.SURVIVAL);
+					}
+					p.closeInventory();
+					Messager.sendMessageWithSound(p, "All players has been set their gamemode to survival", Sound.ENTITY_CHICKEN_EGG);
 				}else if(item == WCItem.ADMIN_GM1_ALL) {
 					for(Player all : Bukkit.getOnlinePlayers()) {
-						all.setGameMode(GameMode.CREATIVE);
+						if(!all.hasPermission("worldcontrol.admin.gamemode.bypass"))
+							all.setGameMode(GameMode.CREATIVE);
 					}
 					p.closeInventory();
 					Messager.sendMessageWithSound(p, "All players has been given Bob the Builder-powers", Sound.ENTITY_CHICKEN_EGG);
@@ -271,12 +419,36 @@ public class InventoryClickListener implements Listener{
 					}
 					p.closeInventory();
 					Messager.sendMessageWithSound(p, "Say goodbye to your server.", Sound.ENTITY_CHICKEN_EGG);
+				}else if(item == WCItem.ADMIN_TOGGLE_WHITELIST) {
+					if(Bukkit.hasWhitelist())
+						Messager.sendMessageWithSound(p, "§cWhitelist disabled.", Sound.ENTITY_CHICKEN_EGG);
+					else Messager.sendMessageWithSound(p, "§aWhitelist enabled", Sound.ENTITY_CHICKEN_EGG);
+					
+					Bukkit.setWhitelist(!Bukkit.hasWhitelist());
+					p.closeInventory();
+					
 				}
 				
 				
-			}else {
-				if(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).equalsIgnoreCase("back;"))
-					p.openInventory(invManager.getControlInventory(w));
+			}else if(currentItem.hasItemMeta()){
+				if(currentItem.getItemMeta().hasDisplayName()) {
+					if(HiddenStringUtils.hasHiddenString(currentItem.getItemMeta().getDisplayName())) {
+						if(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).contains(";")) {
+							String[] str = HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";");
+							if(str[0].equalsIgnoreCase("back")) {
+								if(str[1].equalsIgnoreCase("control"))
+									InventoryManager.updateInventory(p, invManager.getControlInventory(w));
+								else if(str[1].equalsIgnoreCase("gamerule")) {
+									InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+								}
+								p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
+
+							
+							}
+							
+						}
+					}
+				}
 				
 				
 			}
