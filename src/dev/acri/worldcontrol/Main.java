@@ -1,7 +1,6 @@
 package dev.acri.worldcontrol;
 
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.acri.worldcontrol.commands.ControlCommand;
@@ -17,8 +16,6 @@ import dev.acri.worldcontrol.events.PlayerInteractListener;
 import dev.acri.worldcontrol.events.PlayerMoveListener;
 import dev.acri.worldcontrol.inventory.InventoryManager;
 import dev.acri.worldcontrol.utils.ConfigManager;
-import dev.acri.worldcontrol.utils.OptionsStorage;
-import dev.acri.worldcontrol.utils.StorageManager;
 
 public class Main extends JavaPlugin{
 	
@@ -45,10 +42,7 @@ public class Main extends JavaPlugin{
 		
 		
 		ConfigManager.loadConfigsToStorage();
-		/*
-		
-		*/
-		
+
 		InventoryManager.startRunnable();
 		
 	}

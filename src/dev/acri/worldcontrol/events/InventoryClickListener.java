@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.ItemStack;
@@ -28,21 +27,55 @@ public class InventoryClickListener implements Listener{
 	
 	InventoryManager invManager = new InventoryManager();
 	WorldBorderUtils borderUtils = new WorldBorderUtils();
+	SpreadPlayersThread spt = new SpreadPlayersThread(null);
+	
+	/*
+	@EventHandler
+	public void onInventoryItemMove(InventoryMoveItemEvent e) {
+		Bukkit.getLogger().info("0");
+		if(e.getDestination().getItem(4) != null) { 
+			Bukkit.getLogger().info("1");
+			if(e.getDestination().getItem(4).getType() == Material.BOOK) {
+				Bukkit.getLogger().info("2");
+				if(e.getDestination().getItem(4).hasItemMeta()) {
+					Bukkit.getLogger().info("3");
+					if(HiddenStringUtils.extractHiddenString(e.getDestination().getItem(4).getItemMeta().getDisplayName()).contains("menu;")) {
+						Bukkit.getLogger().info("4");
+						e.setCancelled(true);
+					}
+				}
+			}
+		}
+		if(e.getSource().getItem(4) != null) 
+			if(e.getSource().getItem(4).getType() == Material.BOOK) 
+				if(e.getSource().getItem(4).hasItemMeta()) 
+					if(HiddenStringUtils.extractHiddenString(e.getSource().getItem(4).getItemMeta().getDisplayName()).contains("menu;")) 
+						e.setCancelled(true);
+	}
+	*/
+	
+	/*@EventHandler
+	public void onInventoryDrag(InventoryDragEvent e) {
+		ItemStack dragged = e.getOldCursor(); 
+		if(e.get.getItem(4) != null) 
+			if(e.getSource().getItem(4).getType() == Material.BOOK) 
+				if(e.getSource().getItem(4).hasItemMeta()) 
+					if(HiddenStringUtils.extractHiddenString(e.getSource().getItem(4).getItemMeta().getDisplayName()).contains("menu;")) 
+						e.setCancelled(true);
+		
+	}
+	*/
 	
 	@EventHandler
 	public void onPlayerInventoryClick(InventoryClickEvent e) {
-		
 		Player p = (Player) e.getWhoClicked();
 		ItemStack currentItem = e.getCurrentItem();
 		ClickType clickType = e.getClick();
-		InventoryAction invAction = e.getAction();
-		String title = e.getView().getTitle();
 		
 		if(e.getClickedInventory() == null) {
 			return ;
 		}
-		
-		
+	
 		if(clickType == ClickType.UNKNOWN)
 			return;
 		if(currentItem == null)
@@ -51,16 +84,15 @@ public class InventoryClickListener implements Listener{
 		if(currentItem.getType().equals(Material.AIR))
 			return;
 		
-		
-		
+
 		
 		boolean isMenu = false;
 
 		
-		if(e.getInventory().getItem(4) != null) {
-			if(e.getInventory().getItem(4).getType() == Material.BOOK) {
-				if(e.getInventory().getItem(4).hasItemMeta()) {
-					if(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).contains("menu;")) {
+		if(e.getClickedInventory().getItem(4) != null) {
+			if(e.getClickedInventory().getItem(4).getType() == Material.BOOK) {
+				if(e.getClickedInventory().getItem(4).hasItemMeta()) {
+					if(HiddenStringUtils.extractHiddenString(e.getClickedInventory().getItem(4).getItemMeta().getDisplayName()).contains("menu;")) {
 						isMenu = true;
 					}
 				}
@@ -68,6 +100,13 @@ public class InventoryClickListener implements Listener{
 		}
 		
 		if(isMenu) {
+			
+			//if(e.getView().getTopInventory().contains(currentItem))
+				//e.setCancelled(true);
+			
+			e.setCancelled(true);
+			
+
 			
 			World w = Bukkit.getWorld(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1]);
 			
@@ -367,11 +406,17 @@ public class InventoryClickListener implements Listener{
 					InventoryManager.updateInventory(p, invManager.getTeleportationControlInventory(w));
 					p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 				}else if(item == WCItem.TELEPORT_SCATTER_BORDER) {
+					if(spt.isAlive()) {
+						Messager.sendMessageWithSound(p, "§cAlready spreading players!", Sound.ENTITY_CHICKEN_EGG);
+						return;
+					}
 					if(w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
 						p.closeInventory();
-						SpreadPlayersThread spt = new SpreadPlayersThread(w);
+						spt = new SpreadPlayersThread(w);
 						spt.start();
 					}
+				}else if(item == WCItem.TELEPORT_TO_SPECIFIC_PLAYER) {
+					InventoryManager.updateInventory(p, invManager.getPlayerChooserInventory(w, 1));
 				}else if(item == WCItem.TELEPORT_ALL_TO_YOU) {
 					for(Player target : Bukkit.getOnlinePlayers()) {
 						target.teleport(p, TeleportCause.COMMAND);
@@ -429,6 +474,23 @@ public class InventoryClickListener implements Listener{
 					
 				}
 				
+				else if(item == WCItem.PAGE_NEXT) {
+					InventoryManager.updateInventory(p, invManager.getPlayerChooserInventory(w, Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getClickedInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2]) + 1));
+				}else if(item == WCItem.PAGE_PREV) {
+					InventoryManager.updateInventory(p, invManager.getPlayerChooserInventory(w, Integer.parseInt(HiddenStringUtils.extractHiddenString(e.getClickedInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[2]) - 1));
+				}else if(item == WCItem.PLAYER_CONTAINER) {
+					Player player = Bukkit.getPlayer(HiddenStringUtils.extractHiddenString(e.getCurrentItem().getItemMeta().getDisplayName()).split(";")[1]);
+					
+					if(!player.isOnline()) {
+						Messager.sendMessageWithSound(p, "§cThis player is not online", Sound.BLOCK_NOTE_BASS);
+					}else {
+						for(Player all : Bukkit.getOnlinePlayers())
+							all.teleport(player);
+						Messager.sendMessageWithSound(p, "§aAll players were teleported to §b" + player.getName(), Sound.ENTITY_CHICKEN_EGG);
+					}
+					p.closeInventory();
+				}
+				
 				
 			}else if(currentItem.hasItemMeta()){
 				if(currentItem.getItemMeta().hasDisplayName()) {
@@ -440,6 +502,8 @@ public class InventoryClickListener implements Listener{
 									InventoryManager.updateInventory(p, invManager.getControlInventory(w));
 								else if(str[1].equalsIgnoreCase("gamerule")) {
 									InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
+								}else if(str[1].equalsIgnoreCase("tp")) {
+									InventoryManager.updateInventory(p, invManager.getTeleportationControlInventory(w));
 								}
 								p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
 
@@ -455,7 +519,7 @@ public class InventoryClickListener implements Listener{
 			
 			
 			
-			e.setCancelled(true);
+			
 		}
 		
 		

@@ -31,7 +31,7 @@ public class ControlCommand implements CommandExecutor{
 		if(args.length == 0)
 			p.openInventory(manager.getControlInventory(p.getWorld()));
 		else if(Bukkit.getWorld(args[0]) == null) {
-			Messager.sendMessageWithSound(p, "§cInvalid world name: §7" + args[0], Sound.BLOCK_NOTE_BASS);
+			Messager.sendMessageWithSound(p, "§cInvalid world name: §7" + args[0], Sound.ENTITY_VILLAGER_NO);
 		}else {
 			p.openInventory(manager.getControlInventory(Bukkit.getWorld(args[0])));
 		}

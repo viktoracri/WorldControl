@@ -23,7 +23,6 @@ public class EntitySpawnListener implements Listener{
 	
 	@EventHandler
 	public void onEntitySpawn(EntitySpawnEvent e) {
-		
 		if(StorageManager.getFromWorld(e.getEntity().getWorld()).isExtremeDifficultyEnabled())
 			if(e.getEntity() instanceof Monster) {
 				Entity en = e.getEntity();

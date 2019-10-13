@@ -30,7 +30,7 @@ public class WorldBorderUtils {
 		
 		if(StorageManager.getFromWorld(p.getWorld()).getBorderSize() < blocks) {
 			border.setSize(0, 5);
-			StorageManager.getFromWorld(p.getWorld()).setBorderSize(1);
+			StorageManager.getFromWorld(p.getWorld()).setBorderSize(0);
 			Messager.sendMessageWithSound(p, "§aThe World Border's size was set to §b1 block§a.", Sound.ENTITY_CHICKEN_EGG);
 
 		}else {
@@ -58,5 +58,6 @@ public class WorldBorderUtils {
 		p.getWorld().getWorldBorder().setSize(500);
 	}
 	
+
 	
 }

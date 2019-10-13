@@ -639,7 +639,7 @@ public class InventoryManager {
 		lore.add("§7within the border.");
 		if(w.getWorldBorder().getSize() > WorldBorderUtils.MAXBORDER) lore.set(0, "§8» §c§lBorder Not Enabled"); 
 		else {lore.add("§7");lore.add("§a» §7Click to start spreading");}
-		inv.setItem(12, ItemStackUtils.getItemStack(WCItem.TELEPORT_SCATTER_BORDER.getItem(), WCItem.TELEPORT_SCATTER_BORDER.getDisplayname(), lore));
+		inv.setItem(11, ItemStackUtils.getItemStack(WCItem.TELEPORT_SCATTER_BORDER.getItem(), WCItem.TELEPORT_SCATTER_BORDER.getDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§7");
@@ -652,12 +652,20 @@ public class InventoryManager {
 		lore.clear();
 		
 		lore.add("§7");
+		lore.add("§7Teleports all online players to a specific player");
+		lore.add("§7");
+		lore.add("§a» §7Click to choose a player");
+		
+		inv.setItem(14, ItemStackUtils.getItemStack(WCItem.TELEPORT_TO_SPECIFIC_PLAYER.getItem(), WCItem.TELEPORT_TO_SPECIFIC_PLAYER.getDisplayname(), lore));
+		lore.clear();
+		
+		lore.add("§7");
 		lore.add("§7Teleports all online players 10 blocks up");
 		lore.add("§7Not recommended for getting friends.");
 		lore.add("§7");
 		lore.add("§a» §7Click to annoy all players");
 		
-		inv.setItem(14, ItemStackUtils.getItemStack(WCItem.TELEPORT_10_UP.getItem(), WCItem.TELEPORT_10_UP.getDisplayname(), lore));
+		inv.setItem(15, ItemStackUtils.getItemStack(WCItem.TELEPORT_10_UP.getItem(), WCItem.TELEPORT_10_UP.getDisplayname(), lore));
 		
 		
 		
@@ -772,6 +780,70 @@ public class InventoryManager {
 		inv.setItem(26, ItemStackUtils.getItemStack(WCItem.VALUE_SAVE.getItem(), WCItem.VALUE_SAVE.getDisplayname(), lore));
 		
 		
+		
+		return inv;
+	}
+	
+	public Inventory getPlayerChooserInventory(World w, int page) {
+		Inventory inv = Bukkit.createInventory(null, 54, "Choose Player");
+		
+		List<String> lore = new ArrayList<String>();
+		
+		for(int i = 45; i < 54; i++) {
+			ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+			ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName("§7");
+			item.setItemMeta(meta);
+			inv.setItem(i, item);
+		}
+		
+		for(int i = 0; i < 9; i++) {
+			ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+			ItemMeta meta = item.getItemMeta();
+			meta.setDisplayName("§7");
+			item.setItemMeta(meta);
+			inv.setItem(i, item);
+		}
+		
+		
+		lore.add("§7");
+		lore.add("§7Choose a player you want to teleport everyone to");
+		
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";" + page + ";") + "§3Edit Value", lore));
+		lore.clear();
+		
+		lore.add("§a» §7Click to go back");
+		inv.setItem(45, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;tp;") + "§eGo Back", lore));
+		lore.clear();
+		
+		inv.setItem(49, ItemStackUtils.getItemStack(Material.PAPER, "§3Page: §a" + page));
+		
+		if(Bukkit.getOnlinePlayers().size() > 28) {
+			lore.add("§a» §7Click to go to the next page");
+			inv.setItem(50, ItemStackUtils.getItemStack(WCItem.PAGE_NEXT.getItem(), WCItem.PAGE_NEXT.getDisplayname(), lore));
+			lore.clear();
+		}
+		
+		if(page > 1) {
+			lore.add(0, "§a» §7Click to go to the previous page");
+			inv.setItem(48, ItemStackUtils.getItemStack(WCItem.PAGE_PREV.getItem(), WCItem.PAGE_PREV.getDisplayname(), lore));
+			lore.clear();
+		}
+		
+		
+		
+		lore.add("§a» §7Click to choose this player");
+		
+		int i = 0;
+		
+		for(int x = (page - 1) * 28; x < Bukkit.getOnlinePlayers().size(); x++) {
+			Player all = (Player) Bukkit.getOnlinePlayers().toArray()[x];
+			ItemStack item = ItemStackUtils.getSkull(HiddenStringUtils.replaceHiddenString(WCItem.PLAYER_CONTAINER.getDisplayname(), HiddenStringUtils.extractHiddenString(WCItem.PLAYER_CONTAINER.getDisplayname()) + all.getName() + ";").replace("%a", all.getName()), all.getName(), lore);	
+			inv.setItem(10 + i +((int)(i / 7)) * 2, item);
+			i += 1;
+			if(i >= 28)break;
+			
+		}
 		
 		return inv;
 	}

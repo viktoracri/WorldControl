@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import dev.acri.worldcontrol.utils.HiddenStringUtils;
+import dev.acri.worldcontrol.utils.ItemStackUtils;
 
 public enum WCItem {
 	
@@ -70,8 +71,13 @@ public enum WCItem {
 	
 	SUBMENU_TELEPORTATION("§3Teleportation", Material.ENDER_PEARL),
 	TELEPORT_ALL_TO_YOU("§aTP all to you", new ItemStack(Material.SKULL_ITEM, 1, (byte) 3)),
+	TELEPORT_TO_SPECIFIC_PLAYER("§aTP all to player",new ItemStack(Material.SKULL_ITEM, 1, (byte) 3)),
 	TELEPORT_SCATTER_BORDER("§aSpread Players", Material.ENDER_PEARL),
 	TELEPORT_10_UP("§aTP all 10 blocks up", Material.FEATHER),
+	
+	PAGE_NEXT("§aNext Page", ItemStackUtils.getSkull("§aNext Page", "MHF_ArrowRight")),
+	PAGE_PREV("§aPrevious Page", ItemStackUtils.getSkull("§aPrevious Page", "MHF_ArrowLeft")),
+	PLAYER_CONTAINER("§a%a", Material.DIRT),
 	
 	SUBMENU_ADMIN("§3Admin", Material.REDSTONE_BLOCK),
 	ADMIN_KICK_ALL("§aKick all", Material.WOOD_AXE),
