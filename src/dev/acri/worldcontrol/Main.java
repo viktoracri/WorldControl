@@ -16,6 +16,7 @@ import dev.acri.worldcontrol.events.PlayerInteractListener;
 import dev.acri.worldcontrol.events.PlayerMoveListener;
 import dev.acri.worldcontrol.inventory.InventoryManager;
 import dev.acri.worldcontrol.utils.ConfigManager;
+import dev.acri.worldcontrol.utils.Metrics;
 
 public class Main extends JavaPlugin{
 	
@@ -44,6 +45,8 @@ public class Main extends JavaPlugin{
 		ConfigManager.loadConfigsToStorage();
 
 		InventoryManager.startRunnable();
+		
+		Metrics metrics = new Metrics(this);
 		
 	}
 	

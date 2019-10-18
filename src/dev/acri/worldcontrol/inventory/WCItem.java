@@ -117,7 +117,7 @@ public enum WCItem {
 	
 	
 	public String getDisplayname() {
-		return HiddenStringUtils.encodeString(this.toString() + ";") + displayname;
+		return HiddenStringUtils.encodeString("WC;" + this.toString() + ";") + displayname;
 	}
 	
 	public String getJustDisplayname() {

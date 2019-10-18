@@ -92,7 +92,7 @@ public class InventoryClickListener implements Listener{
 		if(e.getClickedInventory().getItem(4) != null) {
 			if(e.getClickedInventory().getItem(4).getType() == Material.BOOK) {
 				if(e.getClickedInventory().getItem(4).hasItemMeta()) {
-					if(HiddenStringUtils.extractHiddenString(e.getClickedInventory().getItem(4).getItemMeta().getDisplayName()).contains("menu;")) {
+					if(HiddenStringUtils.extractHiddenString(e.getClickedInventory().getItem(4).getItemMeta().getDisplayName()).contains("wcmenu;")) {
 						isMenu = true;
 					}
 				}
@@ -113,7 +113,12 @@ public class InventoryClickListener implements Listener{
 			if(!HiddenStringUtils.hasHiddenString(currentItem.getItemMeta().getDisplayName()))
 				return;
 			
-			WCItem item = WCItem.getItem(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";")[0]);
+			if(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";")[0] != "wc")
+				return;
+			Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("PluginName"));
+			
+			
+			WCItem item = WCItem.getItem(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";")[1]);
 			if(item != null) {
 				if(item == WCItem.SUBMENU_PLAYER) {
 					InventoryManager.updateInventory(p, invManager.getPlayerControlInventory(w));
