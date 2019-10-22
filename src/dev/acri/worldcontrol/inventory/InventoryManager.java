@@ -51,7 +51,7 @@ public class InventoryManager {
 		lore.add("§8» §7Plugin by §aViktoracri");
 		lore.add("§8» §7Discord: §9Viktoracri#0556");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + "§aWorldControl", lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + "§aWorldControl", lore));
 		lore.clear();
 		
 		
@@ -121,11 +121,11 @@ public class InventoryManager {
 		lore.add("§7Control what the players can do,");
 		lore.add("§7among other values");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + "§3Player Control", lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + "§3Player Control", lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -216,11 +216,11 @@ public class InventoryManager {
 		lore.add("§7Toggle the World Border, control its");
 		lore.add("§7size and its center position.");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + "§3Border Control", lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + "§3Border Control", lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -284,11 +284,11 @@ public class InventoryManager {
 		lore.add("§7Control the time in your current");
 		lore.add("§7world.");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + WCItem.SUBMENU_TIME.getJustDisplayname(), lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + WCItem.SUBMENU_TIME.getJustDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -332,11 +332,11 @@ public class InventoryManager {
 		lore.add("§7Choose the global difficulty.");
 		lore.add("§7");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + WCItem.SUBMENU_DIFFICULTY.getJustDisplayname(), lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + WCItem.SUBMENU_DIFFICULTY.getJustDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -396,11 +396,11 @@ public class InventoryManager {
 		lore.add("§7Control some of the essential gamerules");
 		lore.add("§7in your world.");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + WCItem.SUBMENU_GAMERULES.getJustDisplayname(), lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + WCItem.SUBMENU_GAMERULES.getJustDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(36, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
+		inv.setItem(36, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		
@@ -626,11 +626,11 @@ public class InventoryManager {
 		lore.add("§7Teleportation is a magical thing only");
 		lore.add("§7accessible through the gods of Minecraft...");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + WCItem.SUBMENU_TELEPORTATION.getJustDisplayname(), lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + WCItem.SUBMENU_TELEPORTATION.getJustDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		lore.add("§8» §7Border Size: §b" + StorageManager.getFromWorld(w).getBorderSize());
@@ -680,11 +680,11 @@ public class InventoryManager {
 		lore.add("§7Admin related. Do not touch unless");
 		lore.add("§7you know what you're doing.");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";") + WCItem.SUBMENU_ADMIN.getJustDisplayname(), lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + WCItem.SUBMENU_ADMIN.getJustDisplayname(), lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;control;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;control;") + "§eGo Back", lore));
 		lore.clear();
 		
 		lore.add("§7Kicks all normal players");
@@ -743,11 +743,11 @@ public class InventoryManager {
 		lore.add("§7");
 		lore.add("§7Edit the value of the gamerule §b" + gamerule);
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";" + gamerule + ";" + value + ";") + "§3Edit Value", lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";" + gamerule + ";" + value + ";") + "§3Edit Value", lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;gamerule;") + "§eGo Back", lore));
+		inv.setItem(18, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;gamerule;") + "§eGo Back", lore));
 		lore.clear();
 		
 		lore.add("§8» §7New value: §b" + value);
@@ -809,11 +809,11 @@ public class InventoryManager {
 		lore.add("§7");
 		lore.add("§7Choose a player you want to teleport everyone to");
 		
-		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("menu;" + w.getName() + ";" + page + ";") + "§3Edit Value", lore));
+		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";" + page + ";") + "§3Edit Value", lore));
 		lore.clear();
 		
 		lore.add("§a» §7Click to go back");
-		inv.setItem(45, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("back;tp;") + "§eGo Back", lore));
+		inv.setItem(45, ItemStackUtils.getItemStack(Material.ARROW, HiddenStringUtils.encodeString("WCITEM;back;tp;") + "§eGo Back", lore));
 		lore.clear();
 		
 		inv.setItem(49, ItemStackUtils.getItemStack(Material.PAPER, "§3Page: §a" + page));

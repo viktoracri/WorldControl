@@ -68,6 +68,10 @@ public class InventoryClickListener implements Listener{
 	
 	@EventHandler
 	public void onPlayerInventoryClick(InventoryClickEvent e) {
+		
+		
+		
+		
 		Player p = (Player) e.getWhoClicked();
 		ItemStack currentItem = e.getCurrentItem();
 		ClickType clickType = e.getClick();
@@ -83,7 +87,6 @@ public class InventoryClickListener implements Listener{
 		
 		if(currentItem.getType().equals(Material.AIR))
 			return;
-		
 
 		
 		boolean isMenu = false;
@@ -105,18 +108,15 @@ public class InventoryClickListener implements Listener{
 				//e.setCancelled(true);
 			
 			e.setCancelled(true);
-			
 
-			
 			World w = Bukkit.getWorld(HiddenStringUtils.extractHiddenString(e.getInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1]);
 			
 			if(!HiddenStringUtils.hasHiddenString(currentItem.getItemMeta().getDisplayName()))
 				return;
-			
-			if(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";")[0] != "wc")
+			 
+			if(!HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";")[0].equalsIgnoreCase("WCITEM"))
 				return;
-			Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("PluginName"));
-			
+
 			
 			WCItem item = WCItem.getItem(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";")[1]);
 			if(item != null) {
@@ -502,12 +502,12 @@ public class InventoryClickListener implements Listener{
 					if(HiddenStringUtils.hasHiddenString(currentItem.getItemMeta().getDisplayName())) {
 						if(HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).contains(";")) {
 							String[] str = HiddenStringUtils.extractHiddenString(currentItem.getItemMeta().getDisplayName()).split(";");
-							if(str[0].equalsIgnoreCase("back")) {
-								if(str[1].equalsIgnoreCase("control"))
+							if(str[1].equalsIgnoreCase("back")) {
+								if(str[2].equalsIgnoreCase("control"))
 									InventoryManager.updateInventory(p, invManager.getControlInventory(w));
-								else if(str[1].equalsIgnoreCase("gamerule")) {
+								else if(str[2].equalsIgnoreCase("gamerule")) {
 									InventoryManager.updateInventory(p, invManager.getGameruleControlInventory(w));
-								}else if(str[1].equalsIgnoreCase("tp")) {
+								}else if(str[3].equalsIgnoreCase("tp")) {
 									InventoryManager.updateInventory(p, invManager.getTeleportationControlInventory(w));
 								}
 								p.playSound(p.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1l, 1l);
