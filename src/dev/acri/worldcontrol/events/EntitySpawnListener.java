@@ -26,14 +26,15 @@ public class EntitySpawnListener implements Listener{
 		if(StorageManager.getFromWorld(e.getEntity().getWorld()).isExtremeDifficultyEnabled())
 			if(e.getEntity() instanceof Monster) {
 				Entity en = e.getEntity();
-				if(en.getType() == EntityType.ZOMBIE) {
+				if(en.getType() == EntityType.ZOMBIE || en.getType() == EntityType.ZOMBIE_VILLAGER || en.getType() == EntityType.PIG_ZOMBIE) {
 					en = randomSword(en);
 					en = randomArmor(en);
 				}else if(en.getType() == EntityType.SKELETON) {
 					en = randomArmor(en);
 					en = randomBow(en);
+				}else if(en.getType() == EntityType.WITHER_SKELETON) {
+					en = randomArmor(en);
 				}
-				
 				en = randomEffects(en);
 			}
 		

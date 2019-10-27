@@ -46,7 +46,7 @@ public class Main extends JavaPlugin{
 
 		InventoryManager.startRunnable();
 		
-		Metrics metrics = new Metrics(this);
+		new Metrics(this);
 		
 	}
 	

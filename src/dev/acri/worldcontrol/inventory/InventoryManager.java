@@ -48,8 +48,10 @@ public class InventoryManager {
 	
 		lore.add("§8» §7Current World: §b" + w.getName());
 		lore.add("§7");
-		lore.add("§8» §7Plugin by §aViktoracri");
+		lore.add("§8» §6§lWorldControl v" + Main.getInstance().getDescription().getVersion() + "§7 by §aViktoracri");
 		lore.add("§8» §7Discord: §9Viktoracri#0556");
+		lore.add("§7");
+		lore.add("§8» §7Please report any bugs via discord.");
 		
 		inv.setItem(4, ItemStackUtils.getItemStack(Material.BOOK, HiddenStringUtils.encodeString("wcmenu;" + w.getName() + ";") + "§aWorldControl", lore));
 		lore.clear();
@@ -895,27 +897,30 @@ public class InventoryManager {
 						if(p.getOpenInventory().getTopInventory().getItem(4).hasItemMeta()) {
 							if(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().hasDisplayName()){
 								if(HiddenStringUtils.hasHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName())){
-									
-									
-									InventoryManager invManager = new InventoryManager();	
-									World w = Bukkit.getWorld(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1]);
-									
-									
-									if(p.getOpenInventory().getTitle().equalsIgnoreCase("Time")) {
-										if(!p.getOpenInventory().getTopInventory().getItem(13).getItemMeta().getLore().get(0).substring(p.getOpenInventory().getTopInventory().getItem(13).getItemMeta().getLore().get(0).indexOf("§b") + 2).equalsIgnoreCase(getCurrentTimeFormatted(w))) {
-											updateInventory(p, invManager.getTimeControlInventory(w));
-											//p.getOpenInventory().getTopInventory().setContents(invManager.getTimeControlInventory(w).getContents());
-										}
-											//p.openInventory(invManager.getTimeControlInventory(w));
-											
+									if(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).toLowerCase().contains("wcmenu;")) {
+										InventoryManager invManager = new InventoryManager();	
+										World w = Bukkit.getWorld(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1]);
 										
-									}else if(p.getOpenInventory().getTitle().equalsIgnoreCase("World Border") && w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
-										if(p.getOpenInventory().getTopInventory().getItem(20).getItemMeta().getLore().get(1).contains("Actual size")) {
-											//p.openInventory(invManager.getBorderControlInventory(Bukkit.getWorld(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1])));
-											updateInventory(p, invManager.getBorderControlInventory(w));
-										}else {
+										
+										if(p.getOpenInventory().getTitle().equalsIgnoreCase("Time")) {
+											if(!p.getOpenInventory().getTopInventory().getItem(13).getItemMeta().getLore().get(0).substring(p.getOpenInventory().getTopInventory().getItem(13).getItemMeta().getLore().get(0).indexOf("§b") + 2).equalsIgnoreCase(getCurrentTimeFormatted(w))) {
+												updateInventory(p, invManager.getTimeControlInventory(w));
+												//p.getOpenInventory().getTopInventory().setContents(invManager.getTimeControlInventory(w).getContents());
+											}
+												//p.openInventory(invManager.getTimeControlInventory(w));
+												
+											
+										}else if(p.getOpenInventory().getTitle().equalsIgnoreCase("World Border") && w.getWorldBorder().getSize() < WorldBorderUtils.MAXBORDER) {
+											if(p.getOpenInventory().getTopInventory().getItem(20).getItemMeta().getLore().get(1).contains("Actual size")) {
+												//p.openInventory(invManager.getBorderControlInventory(Bukkit.getWorld(HiddenStringUtils.extractHiddenString(p.getOpenInventory().getTopInventory().getItem(4).getItemMeta().getDisplayName()).split(";")[1])));
+												updateInventory(p, invManager.getBorderControlInventory(w));
+											}else {
+											}
 										}
 									}
+									
+									
+									
 								}
 							}
 						}

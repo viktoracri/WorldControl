@@ -1,7 +1,9 @@
 name: WorldControl
-version: 1.2.2
+version: 1.2.3
 main: dev.acri.worldcontrol.Main
 author: Viktoracri
+website: acri.dev
+description: Control your world with a powerful and efficient GUI!
 
 commands:
   control:

@@ -98,8 +98,6 @@ public enum WCItem {
 	VALUE_SAVE("§aACCEPT",  new ItemStack(Material.STAINED_GLASS, 1, (byte) 5)),
 	
 	
-	
-	
 	NOTHING("", Material.AIR);
 	
 	private String displayname;

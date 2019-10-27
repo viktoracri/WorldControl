@@ -10,6 +10,7 @@ public class ConfigManager {
 	
 	public static void loadConfigsToStorage(){
 		
+		StorageManager.getStorage().clear();
 		for(World w : Bukkit.getWorlds()) {
 			OptionsStorage OS = new OptionsStorage(w);
 			
